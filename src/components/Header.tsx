@@ -45,7 +45,7 @@ const onEdit=(id:string):void=>{
   {detail && <Navigate to={`/${select.id}`}/>}
 {list.map((item:Task,key:number)=>{
   return (
-    <Item task={item} handleClick={onNote} handleDelete={onDelete} handleEdit={onEdit} />
+    <Item task={item} handleClick={onNote} handleDelete={onDelete} handleEdit={onEdit} selectedTags={item.tags}/>
   )
 })}
 </div>

@@ -7,5 +7,5 @@ export type Task={
 
 export type Tag={
   label:string,
-  id:string
+  value:string
 }

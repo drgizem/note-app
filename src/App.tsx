@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {useState} from "react"
 import './App.css';
 import { Header } from './components/Header';
@@ -14,7 +14,12 @@ function App() {
   const [list,setList]=useState<Task[]>([])
   const [select,setSelect]=useState<Task>({} as Task)
   const [editNote,setEditNote]=useState<Task>({} as Task)
-  const [createdTag,setCreatedTag]=useState<Tag>({} as Tag)
+
+
+  const selectChange=(option:any)=>{
+    setNote((note)=> {return {...note,tags:option}})
+    setEditNote((note)=> {return {...note,tags:option}})
+  }
 
   const onChange=(event:any)=>{
     const {name,value}=event.target
@@ -34,7 +39,7 @@ function App() {
     title:"",
     tags:[],
     body:"",
-    id:uuid()
+    id:uuid() 
     })
   }
   const onEdit=(id:string):void=>{
@@ -60,14 +65,14 @@ function App() {
     setList(list.filter((item)=>{
       return item.id !== id }))
   }
-  console.log(list)
+
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Header list={list} onDelete={onDelete} handleNote={onNote} handleEdit={onEdit}/>}/>
-        <Route path="/new" element={<Note note={note}  handleClick={onClick} handleChange={onChange}/>}/>
-        <Route path="/edit" element={<EditPage editTask={editNote}  handleChange={onChange} handleClick={handleEdit}/>}/>
-        <Route path={`/${select.id}`} element={<SelectNote selected={select} />}/>
+        <Route path="/" element={<Header list={list}  onDelete={onDelete} handleNote={onNote} handleEdit={onEdit}/>}/>
+        <Route path="/new" element={<Note note={note} handleClick={onClick} handleChange={onChange} noTag={note.tags} selectChange={selectChange} />}/>
+        <Route path="/edit" element={<EditPage selectChange={selectChange} editTask={editNote} editTags={editNote.tags} handleChange={onChange} handleClick={handleEdit}/>}/>
+        <Route path={`/${select.id}`} element={<SelectNote selectedTags={select.tags} selected={select} />}/>
       </Routes>
   </div>
   );

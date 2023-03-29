@@ -4,16 +4,20 @@ import { useState } from 'react';
 import {Task,Tag} from "../types"
 import { Link } from 'react-router-dom';
 import { availableTags } from '../data';
-import CreatableReactSelect from "react-select/creatable"
+import Select from "react-select";
+import makeAnimated from 'react-select/animated';
 import uuid from 'react-uuid';
 
 type Props={
   note:Task,
   handleClick():void,
   handleChange(event:any):void
+  selectChange(option:any):void,
+  noTag:Tag[]
 }
-export const Note=({note,handleClick,handleChange}:Props)=>{
-  const [tags,setTags]=useState<Tag[]>([])
+const noteComponents = makeAnimated();
+export const Note=({note,handleClick,handleChange, selectChange,noTag}:Props)=>{
+ 
   
   return (<>
   <div>
@@ -24,32 +28,18 @@ export const Note=({note,handleClick,handleChange}:Props)=>{
       </Link>
       </div> 
       <div className='note__inputs'>
-       <TextField id="outlined-basic" label="Title" variant="outlined" value={note.title} name="title"
+       <TextField label="Title" variant="outlined" value={note.title} name="title"
           onChange={handleChange}/>
-       <CreatableReactSelect
-          onCreateOption={
-            label=>{
-              const newTag={id:uuid(),label}
-              setTags((preTag)=>[...preTag,newTag])
-            }
-         }
-          value={tags.map((tag)=>{
-            return {label:tag.label,value:tag.id}
-          })}
-          onChange={tags => {
-            setTags(
-              tags.map(tag => {
-                return { label: tag.label, id: tag.value }
-              })
-            )
-          }}
-          isMulti
-          name="tags"
-          options={availableTags.map((tag)=>{
-            return {label:tag.label,value:tag.id}})}
-          className="basic-multi-select"
-          classNamePrefix="select"
-  />
+      <Select
+      closeMenuOnSelect={false}
+      components={noteComponents}
+      defaultValue={noTag}
+      isMulti
+      options={availableTags}
+      onChange={selectChange}
+      className="note__tags"
+      placeholder="Tags"
+    />
        </div>
        <div className='note__body'>
        <TextField
@@ -60,7 +50,9 @@ export const Note=({note,handleClick,handleChange}:Props)=>{
           onChange={handleChange}
           name="body"
         />
+        <Link to="/">
         <Button variant="text" onClick={handleClick}>Save</Button>
+        </Link>
        </div>
     </div>
   </>

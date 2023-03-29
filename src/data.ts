@@ -1,11 +1,12 @@
 import uuid from 'react-uuid';
+import { Tag } from './types';
 
-export const availableTags=[
-  {label:"home",id:uuid()},
-  {label:"general",id:uuid()},
-  {label:"work",id:uuid()},
-  {label:"family",id:uuid()},
-  {label:"shopping",id:uuid()},
-  {label:"software",id:uuid()},
-  {label:"friends",id:uuid()}
+export const availableTags:Tag[]=[
+  {label:"home",value:"home"},
+  {label:"general",value:"general"},
+  {label:"work",value:"work"},
+  {label:"family",value:"family"},
+  {label:"shopping",value:"shopping"},
+  {label:"software",value:"software"},
+  {label:"friends",value:"friends"}
 ]
