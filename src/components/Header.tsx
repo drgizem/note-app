@@ -1,8 +1,7 @@
 import Button from '@mui/material/Button';
 import {useState} from "react"
-import {Task,Tag} from "../types"
+import {Task} from "../types"
 import { Item } from "./Item"
-import uuid from 'react-uuid';
 import { Navigate } from 'react-router-dom';
 
 type Props={

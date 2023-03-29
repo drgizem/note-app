@@ -1,12 +1,11 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useState } from 'react';
 import {Task,Tag} from "../types"
 import { Link } from 'react-router-dom';
 import { availableTags } from '../data';
 import Select from "react-select";
 import makeAnimated from 'react-select/animated';
-import uuid from 'react-uuid';
+
 
 type Props={
   note:Task,

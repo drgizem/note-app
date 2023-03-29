@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import {useState} from "react"
 import './App.css';
 import { Header } from './components/Header';
 import {Note} from "./components/Note"
 import { EditPage } from './components/EditPage';
 import { SelectNote } from './components/SelectNote';
-import { Routes,Route, Navigate, Link } from 'react-router-dom';
-import {Task,Tag} from "./types"
+import { Routes,Route } from 'react-router-dom';
+import {Task} from "./types"
 import uuid from 'react-uuid';
 
 function App() {

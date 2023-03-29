@@ -2,9 +2,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import {Task,Tag} from "../types"
-import { Navigate,Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { availableTags } from '../data';
-import uuid from 'react-uuid';
 import Select from "react-select";
 import makeAnimated from 'react-select/animated';
 
@@ -17,13 +16,9 @@ type Props={
 }
 const noteComponents = makeAnimated();
 export const EditPage=({editTask,handleChange,handleClick,selectChange,editTags}:Props)=>{
-  const [mainPage,setMainPage]=useState<boolean>(false)
-
-  const onClick=()=>{
-    setMainPage(true)
-  }
+  
   return (<>
-  {mainPage ? <Navigate to="/"/> : <div>
+  <div>
       <div className='note__title'>
       <h2>Edit Note</h2>
       <Link to="/"><Button variant="text">Back</Button></Link>
@@ -52,7 +47,7 @@ export const EditPage=({editTask,handleChange,handleClick,selectChange,editTags}
         />
         <Link to="/"><Button variant="text" onClick={()=>handleClick(editTask.id)}>Edit</Button></Link>
        </div>
-    </div>}
+    </div>
   </>
   )
 }

@@ -1,4 +1,3 @@
-import uuid from 'react-uuid';
 import { Tag } from './types';
 
 export const availableTags:Tag[]=[
